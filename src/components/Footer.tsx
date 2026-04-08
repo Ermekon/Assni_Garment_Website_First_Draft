@@ -8,8 +8,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Col 1 */}
           <div>
-            <Link to="/" className="text-3xl font-bold tracking-tighter text-white mb-6 block">
-              ASSNI<span className="text-accent">.</span>
+            <Link to="/" className="inline-block mb-6">
+              <img src="/images/logo/Logo_White.png" alt="Assni Garment" className="h-8 w-auto" />
             </Link>
             <p className="text-gray-400 mb-8">
               Your Brand on Every Team Member — Without the Supplier Chaos.
