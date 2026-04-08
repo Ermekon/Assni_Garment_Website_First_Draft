@@ -66,7 +66,7 @@ export default function Header() {
         <div className="max-w-[1410px] mx-auto px-4 md:px-8 flex justify-between items-center">
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            <img src="/images/logo/Logo_black.png" alt="Assni Garment" className="h-10 w-auto" />
+            <img src="/images/logo/Logo_black.png" alt="Assni Garment" className="h-8 w-auto" />
           </Link>
 
           {/* Desktop Nav */}
