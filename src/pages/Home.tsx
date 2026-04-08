@@ -4,36 +4,73 @@ import { Autoplay, EffectFade } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 import MotionWrapper from '../components/MotionWrapper';
-import { Building2, Briefcase, Calendar, GraduationCap, ChevronDown, ChevronUp } from 'lucide-react';
-import { useState } from 'react';
+import AnimatedCounter from '../components/AnimatedCounter';
+import { StaggerContainer, StaggerItem } from '../components/StaggerContainer';
+import MagneticButton from '../components/MagneticButton';
+import FAQAccordion from '../components/FAQAccordion';
+import { motion, useScroll, useTransform } from 'motion/react';
+import { Building2, Briefcase, Calendar, GraduationCap } from 'lucide-react';
+import { useRef } from 'react';
 
 export default function Home() {
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
-
-  const faqs = [
-    { q: "What is your minimum order quantity?", a: "Our minimum order quantity is 50 units per design." },
-    { q: "How long does production take?", a: "Standard production takes 14-21 days after sample approval." },
-    { q: "Do you provide samples?", a: "Yes, we provide a physical sample within 48 hours of brief approval." },
-    { q: "Can you help with design?", a: "Yes, our in-house design team can help refine your concepts." },
-    { q: "What printing methods do you use?", a: "We offer screen printing, embroidery, sublimation, and heat transfer." },
-    { q: "Do you deliver outside Addis Ababa?", a: "Yes, we deliver across Ethiopia and handle export orders." }
-  ];
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollY } = useScroll();
+  const heroImgY = useTransform(scrollY, [0, 600], [0, 160]);
 
   return (
     <main>
       {/* Hero Section */}
-      <section className="relative h-[90vh] min-h-[600px] flex items-center overflow-hidden bg-dark-bg text-white">
-        <div className="absolute inset-0 z-0">
-          <MotionWrapper animation="zoom-out" hold className="w-full h-full">
-            <img 
-              src="https://picsum.photos/seed/garment/1920/1080" 
-              alt="Garment production" 
-              className="w-full h-full object-cover opacity-40"
-              referrerPolicy="no-referrer"
-            />
-          </MotionWrapper>
+      <section ref={heroRef} className="relative h-[90vh] min-h-[600px] flex items-center overflow-hidden bg-dark-bg text-white">
+        {/* Animated gradient mesh */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <motion.div
+            animate={{
+              background: [
+                'radial-gradient(ellipse at 20% 50%, rgba(26,107,60,0.35) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(26,107,60,0.15) 0%, transparent 50%)',
+                'radial-gradient(ellipse at 60% 80%, rgba(26,107,60,0.30) 0%, transparent 60%), radial-gradient(ellipse at 30% 10%, rgba(26,107,60,0.20) 0%, transparent 50%)',
+                'radial-gradient(ellipse at 20% 50%, rgba(26,107,60,0.35) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(26,107,60,0.15) 0%, transparent 50%)',
+              ],
+            }}
+            transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+            className="absolute inset-0 z-10"
+          />
+          <motion.img
+            style={{ y: heroImgY, scale: 1.1 }}
+            src="/images/hero/hero.jpg"
+            alt="Garment production"
+            className="w-full h-full object-cover opacity-35"
+          />
         </div>
         
+        {/* Floating Badges */}
+        <motion.div
+          animate={{ y: [0, -12, 0] }}
+          transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute top-[20%] right-[8%] z-10 hidden lg:block"
+        >
+          <div className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-5 py-3 rounded-2xl text-sm font-bold shadow-lg">
+            ⚡ 48hr Physical Sample
+          </div>
+        </motion.div>
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 0.8 }}
+          className="absolute bottom-[28%] right-[12%] z-10 hidden lg:block"
+        >
+          <div className="bg-accent/90 backdrop-blur-md border border-white/10 text-white px-5 py-3 rounded-2xl text-sm font-bold shadow-lg">
+            ✓ 100% In-House Production
+          </div>
+        </motion.div>
+        <motion.div
+          animate={{ y: [0, -8, 0] }}
+          transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}
+          className="absolute top-[40%] right-[5%] z-10 hidden xl:block"
+        >
+          <div className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-5 py-3 rounded-2xl text-sm font-bold shadow-lg">
+            📦 1,200+ Orders Delivered
+          </div>
+        </motion.div>
+
         <div className="relative z-10 max-w-[1410px] mx-auto px-4 md:px-8 w-full">
           <div className="max-w-[900px]">
             <MotionWrapper animation="fade-up-lg" delay={100} hold>
@@ -43,7 +80,7 @@ export default function Home() {
             </MotionWrapper>
             
             <MotionWrapper animation="fade-up-lg" delay={200} hold>
-              <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 text-balance leading-tight text-left w-[900px]">
+              <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 text-balance leading-tight text-left w-[900px] !text-white">
                 Your Brand on Every Team Member Without the Supplier Chaos
               </h1>
             </MotionWrapper>
@@ -57,41 +94,60 @@ export default function Home() {
             </MotionWrapper>
             
             <MotionWrapper animation="fade-up-lg" delay={400} hold className="flex flex-wrap gap-4">
-              <a 
+              <MagneticButton
                 href="https://wa.me/251911149383?text=Hi%2C+I'm+interested+in+a+quote"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-whatsapp hover:bg-whatsapp-hover text-white px-8 py-4 rounded-full font-medium transition-colors text-lg"
               >
                 WhatsApp Us Now
-              </a>
-              <Link 
-                to="/contact"
+              </MagneticButton>
+              <MagneticButton
+                href="/contact"
                 className="bg-transparent border border-white hover:bg-white hover:text-dark-bg text-white px-8 py-4 rounded-full font-medium transition-colors text-lg"
               >
                 Get a Quote
-              </Link>
+              </MagneticButton>
             </MotionWrapper>
           </div>
         </div>
       </section>
 
-      {/* Stats Band */}
-      <section className="bg-dark-bg text-white border-t border-white/10">
+      {/* Wave Divider */}
+      <div className="bg-dark-bg -mt-1">
+        <svg viewBox="0 0 1440 60" className="w-full block" preserveAspectRatio="none" style={{height:'60px'}}>
+          <path d="M0,0 C360,60 1080,60 1440,0 L1440,60 L0,60 Z" fill="#111111" />
+        </svg>
+      </div>
+
+      {/* Stats Band with progress bars */}
+      <section className="bg-dark-bg text-white">
         <div className="max-w-[1410px] mx-auto px-4 md:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10 border-x border-white/10">
+          <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10 border-x border-white/10">
             {[
-              { stat: "1,200+", label: "Orders delivered across Ethiopia" },
-              { stat: "48 hrs", label: "From brief to physical sample" },
-              { stat: "1 team", label: "Design through delivery — no handoffs" },
-              { stat: "24 hrs", label: "Quote turnaround after brief" }
+              { to: 1200, suffix: '+', label: "Orders delivered", bar: 92 },
+              { to: 48,   suffix: ' hrs', label: "Brief to sample", bar: 75 },
+              { to: 1,    suffix: ' team', label: "End-to-end, no handoffs", bar: 100 },
+              { to: 24,   suffix: ' hrs', label: "Quote turnaround", bar: 60 },
             ].map((item, i) => (
-              <MotionWrapper key={i} animation="fade-up-lg" delay={i * 50} className="p-8 md:p-12 text-center">
-                <div className="text-4xl md:text-5xl font-bold mb-2">{item.stat}</div>
-                <div className="text-sm text-gray-400">{item.label}</div>
-              </MotionWrapper>
+              <StaggerItem key={i} className="p-8 md:p-12 text-center">
+                <div className="text-4xl md:text-5xl font-bold mb-2">
+                  <AnimatedCounter to={item.to} suffix={item.suffix} />
+                </div>
+                <div className="text-xs text-gray-400 mb-4">{item.label}</div>
+                {/* Progress bar */}
+                <div className="h-[3px] bg-white/10 rounded-full overflow-hidden">
+                  <motion.div
+                    className="h-full bg-accent rounded-full"
+                    initial={{ width: 0 }}
+                    whileInView={{ width: `${item.bar}%` }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1.4, delay: i * 0.15, ease: [0.22, 1, 0.36, 1] }}
+                  />
+                </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 
@@ -107,62 +163,110 @@ export default function Home() {
             </MotionWrapper>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {[
               { icon: Building2, title: "NGOs", desc: "Reliable production for field teams and campaigns. We understand strict procurement requirements and deadlines." },
               { icon: Briefcase, title: "Businesses", desc: "Professional corporate wear that represents your brand accurately, from office staff to delivery teams." },
               { icon: Calendar, title: "Events", desc: "Bulk orders delivered on time for conferences, exhibitions, and promotional campaigns." },
               { icon: GraduationCap, title: "Schools", desc: "Durable, comfortable uniforms that stand up to daily wear and tear." }
             ].map((segment, i) => (
-              <MotionWrapper key={i} animation="fade-up-lg" delay={i * 100}>
-                <div className="border border-border rounded-2xl p-8 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 bg-white">
+              <StaggerItem key={i}>
+                <motion.div
+                  whileHover={{ y: -6, boxShadow: '0 20px 40px rgba(0,0,0,0.10)' }}
+                  transition={{ duration: 0.3 }}
+                  className="border border-border rounded-2xl p-8 bg-white cursor-default"
+                >
                   <segment.icon className="w-10 h-10 text-accent mb-6" />
                   <h3 className="text-2xl font-bold mb-4">{segment.title}</h3>
                   <p className="text-gray-600 leading-relaxed">{segment.desc}</p>
-                </div>
-              </MotionWrapper>
+                </motion.div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 
       {/* What We Make */}
-      <section className="py-20 md:py-32 bg-light-bg">
+      <section className="py-20 md:py-32 bg-light-bg overflow-hidden">
         <div className="max-w-[1410px] mx-auto px-4 md:px-8">
-          <MotionWrapper animation="fade-up-lg" className="mb-16 text-center">
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-6">What We Make</h2>
+          <MotionWrapper animation="fade-up-lg" className="mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tighter">What We Make</h2>
           </MotionWrapper>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+        <div className="max-w-[1410px] mx-auto px-4 md:px-8 overflow-hidden cursor-grab active:cursor-grabbing">
+          <motion.div
+            drag="x"
+            dragConstraints={{ right: 0, left: -900 }}
+            dragElastic={0.1}
+            className="flex gap-12 pb-10"
+            style={{ width: 'max-content' }}
+          >
             {[
-              { img: "https://picsum.photos/seed/tshirt/600/800", title: "T-Shirts & Polos" },
-              { img: "https://picsum.photos/seed/totebag/600/800", title: "Tote Bags" },
-              { img: "https://picsum.photos/seed/uniform/600/800", title: "Uniforms & Custom Orders" }
+              { img: "/images/products/tshirts-product-card.jpg", title: "T-Shirts & Polos", desc: "Cotton & blended fabrics. Screen print or embroidery.", tags: ["Screen Print", "Embroidery"] },
+              { img: "/images/products/tote-bags-product-card.jpg", title: "Tote Bags", desc: "Durable canvas with crisp, long-lasting prints.", tags: ["Screen Print", "Sublimation"] },
+              { img: "/images/products/uniforms-product-card.jpg", title: "Uniforms & Custom Orders", desc: "Professional sets tailored for your team identity.", tags: ["Embroidery", "Heat Transfer"] },
             ].map((product, i) => (
-              <MotionWrapper key={i} animation="fade-up-lg" delay={i * 100}>
-                <Link to="/services" className="block group hover-zoom">
-                  <div className="aspect-[3/4] overflow-hidden rounded-2xl mb-6">
-                    <img 
-                      src={product.img} 
-                      alt={product.title} 
-                      className="w-full h-full object-cover product-image"
-                      referrerPolicy="no-referrer"
+              <motion.div
+                key={i}
+                whileHover={{ y: -10 }}
+                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                className="w-[80vw] sm:w-[360px] md:w-[420px] lg:w-[460px] shrink-0 group"
+              >
+                <Link to="/services" className="block" draggable={false}>
+                  {/* Image container */}
+                  <div className="h-[420px] sm:h-[480px] md:h-[520px] w-full overflow-hidden rounded-3xl mb-6 relative">
+                    <img
+                      src={product.img}
+                      alt={product.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-108"
+                      draggable={false}
                     />
-                  </div>
-                  <h3 className="text-2xl font-bold text-center group-hover:text-accent transition-colors">{product.title}</h3>
-                </Link>
-              </MotionWrapper>
-            ))}
-          </div>
+                    {/* Always-visible gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
 
-          <div className="text-center">
-            <Link 
-              to="/contact"
-              className="inline-block bg-dark-bg hover:bg-black text-white px-8 py-4 rounded-full font-medium transition-colors text-lg"
-            >
-              Get a Quote
-            </Link>
-          </div>
+                    {/* MOQ badge */}
+                    <div className="absolute top-5 left-5 bg-black/40 backdrop-blur-sm px-4 py-1.5 rounded-full text-xs font-bold text-white tracking-wide border border-white/20">
+                      50+ units MOQ
+                    </div>
+
+                    {/* Hover overlay — slides up */}
+                    <div className="absolute inset-x-0 bottom-0 p-6 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-400 ease-out">
+                      <p className="text-white/90 text-sm leading-relaxed mb-4">{product.desc}</p>
+                      <span className="inline-flex items-center gap-2 text-white font-bold text-sm">
+                        View Details <span className="text-base">→</span>
+                      </span>
+                    </div>
+
+                    {/* Title inside image at bottom */}
+                    <div className="absolute bottom-5 left-5 right-5 group-hover:opacity-0 transition-opacity duration-300">
+                      <h3 className="!text-white font-bold text-xl leading-tight">{product.title}</h3>
+                    </div>
+                  </div>
+
+                  {/* Tags below image */}
+                  <div className="flex gap-2 flex-wrap px-1">
+                    {product.tags.map((tag, j) => (
+                      <span key={j} className="text-xs font-bold text-accent bg-accent/10 px-3 py-1 rounded-full">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+            {/* End padding hint */}
+            <div className="w-4 shrink-0" />
+          </motion.div>
+        </div>
+
+        <div className="max-w-[1410px] mx-auto px-4 md:px-8 mt-8 text-center">
+          <MagneticButton
+            href="/contact"
+            className="inline-block bg-dark-bg hover:bg-black text-white px-8 py-4 rounded-full font-medium transition-colors text-lg"
+          >
+            Get a Quote
+          </MagneticButton>
         </div>
       </section>
 
@@ -170,12 +274,19 @@ export default function Home() {
       <section className="py-20 md:py-32 bg-white">
         <div className="max-w-[1410px] mx-auto px-4 md:px-8">
           <div className="relative rounded-3xl overflow-hidden">
-            <img 
-              src="https://picsum.photos/seed/delivery/1920/1080" 
-              alt="Delivery" 
-              className="w-full h-[600px] object-cover"
-              referrerPolicy="no-referrer"
-            />
+            <motion.div
+              initial={{ clipPath: 'inset(0 100% 0 0)' }}
+              whileInView={{ clipPath: 'inset(0 0% 0 0)' }}
+              viewport={{ once: true, margin: '-10%' }}
+              transition={{ duration: 1.0, ease: [0.22, 1, 0.36, 1] }}
+              className="w-full"
+            >
+              <img
+                src="/images/hero/cta-bg.jpg"
+                alt="Delivery"
+                className="w-full h-[600px] object-cover"
+              />
+            </motion.div>
             <div className="absolute inset-0 bg-black/20"></div>
             <div className="absolute inset-y-0 left-0 w-full md:w-1/2 bg-white p-8 md:p-16 flex flex-col justify-center">
               <MotionWrapper animation="fade-up-lg">
@@ -203,53 +314,128 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why Assni */}
-      <section className="py-20 md:py-32 bg-light-bg">
+      {/* Why Assni — Bento Grid */}
+      <section className="py-20 md:py-32 bg-dark-bg text-white">
         <div className="max-w-[1410px] mx-auto px-4 md:px-8">
           <MotionWrapper animation="fade-up-lg" className="mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tighter">Why Assni</h2>
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tighter !text-white">Why Assni</h2>
           </MotionWrapper>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              { title: "From Brief to Delivery", desc: "We handle everything in-house. No third-party delays or miscommunications." },
-              { title: "Sample Before You Commit", desc: "See and feel a physical sample within 48 hours before approving full production." },
-              { title: "Your Logo Done Right", desc: "We advise on the best printing method so your brand looks crisp and lasts long." },
-              { title: "Direct Communication", desc: "You talk directly to the person managing your order, not a generic sales inbox." }
-            ].map((feature, i) => (
-              <MotionWrapper key={i} animation="fade-up-lg" delay={i * 100}>
-                <div className="border-t-2 border-accent pt-6">
-                  <h3 className="text-xl font-bold mb-4">{feature.title}</h3>
-                  <p className="text-gray-600 leading-relaxed">{feature.desc}</p>
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-12 gap-4">
+            {/* Large card */}
+            <StaggerItem className="md:col-span-6 lg:col-span-5">
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+                className="bg-accent rounded-3xl p-10 h-full min-h-[260px] flex flex-col justify-between"
+              >
+                <div className="text-5xl font-bold text-white/20 mb-4">01</div>
+                <div>
+                  <h3 className="text-2xl font-bold mb-3 !text-white">From Brief to Delivery</h3>
+                  <p className="text-white/80 leading-relaxed">We handle everything in-house. No third-party delays or miscommunications.</p>
                 </div>
-              </MotionWrapper>
-            ))}
-          </div>
+              </motion.div>
+            </StaggerItem>
+
+            {/* Tall card */}
+            <StaggerItem className="md:col-span-6 lg:col-span-4">
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+                className="bg-white/5 border border-white/10 rounded-3xl p-10 h-full min-h-[260px] flex flex-col justify-between"
+              >
+                <div className="text-5xl font-bold text-white/10 mb-4">02</div>
+                <div>
+                  <h3 className="text-2xl font-bold mb-3 !text-white">Sample Before You Commit</h3>
+                  <p className="text-white/80 leading-relaxed">See and feel a physical sample within 48 hours before approving full production.</p>
+                </div>
+              </motion.div>
+            </StaggerItem>
+
+            {/* Stat card */}
+            <StaggerItem className="md:col-span-12 lg:col-span-3">
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+                className="bg-white/5 border border-white/10 rounded-3xl p-10 h-full min-h-[260px] flex flex-col justify-center items-center text-center"
+              >
+                <div className="text-6xl font-bold !text-accent mb-2">48h</div>
+                <p className="text-white text-sm font-medium uppercase tracking-widest">Physical Sample</p>
+              </motion.div>
+            </StaggerItem>
+
+            {/* Bottom two cards */}
+            <StaggerItem className="md:col-span-6">
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+                className="bg-white/5 border border-white/10 rounded-3xl p-10 h-full min-h-[200px] flex flex-col justify-between"
+              >
+                <div className="text-5xl font-bold text-white/10 mb-4">03</div>
+                <div>
+                  <h3 className="text-xl font-bold mb-3 !text-white">Your Logo Done Right</h3>
+                  <p className="text-white/80 leading-relaxed">We advise on the best printing method so your brand looks crisp and lasts long.</p>
+                </div>
+              </motion.div>
+            </StaggerItem>
+
+            <StaggerItem className="md:col-span-6">
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+                className="bg-white/5 border border-white/10 rounded-3xl p-10 h-full min-h-[200px] flex flex-col justify-between"
+              >
+                <div className="text-5xl font-bold text-white/10 mb-4">04</div>
+                <div>
+                  <h3 className="text-xl font-bold mb-3 !text-white">Direct Communication</h3>
+                  <p className="text-white/80 leading-relaxed">You talk directly to the person managing your order, not a generic sales inbox.</p>
+                </div>
+              </motion.div>
+            </StaggerItem>
+          </StaggerContainer>
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-20 md:py-32 bg-white">
-        <div className="max-w-[1410px] mx-auto px-4 md:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {/* Testimonials — Glassmorphism */}
+      <section className="py-20 md:py-32 relative overflow-hidden">
+        {/* Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-accent/90 to-dark-bg z-0" />
+        <div className="absolute inset-0 z-0 opacity-10" style={{backgroundImage: 'radial-gradient(circle at 20% 50%, white 1px, transparent 1px), radial-gradient(circle at 80% 20%, white 1px, transparent 1px)', backgroundSize: '60px 60px'}} />
+
+        <div className="relative z-10 max-w-[1410px] mx-auto px-4 md:px-8">
+          <MotionWrapper animation="fade-up-lg" className="mb-16 text-center">
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tighter !text-white">What Clients Say</h2>
+          </MotionWrapper>
+
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {[
-              { quote: "Assni delivered 500 branded t-shirts for our campaign on time and the quality was exactly what we approved in the sample.", author: "Procurement Manager", company: "[NGO Name]" },
-              { quote: "Finally, a supplier that communicates clearly. The uniforms look great and the team loves wearing them.", author: "Operations Director", company: "[Company Name]" }
+              { quote: "Assni delivered 500 branded t-shirts for our campaign on time and the quality was exactly what we approved in the sample.", author: "Procurement Manager", company: "NGO Partner, Addis Ababa", initial: "P" },
+              { quote: "Finally, a supplier that communicates clearly. The uniforms look great and the team loves wearing them.", author: "Operations Director", company: "Logistics Company, Ethiopia", initial: "O" }
             ].map((testimonial, i) => (
-              <MotionWrapper key={i} animation="fade-up-lg" delay={i * 100}>
-                <div className="bg-light-bg p-10 rounded-3xl h-full flex flex-col">
-                  <div className="text-6xl text-accent font-serif leading-none mb-6">"</div>
-                  <p className="text-xl md:text-2xl font-medium mb-8 flex-grow leading-relaxed">
+              <StaggerItem key={i}>
+                <motion.div
+                  whileHover={{ y: -6 }}
+                  transition={{ duration: 0.3 }}
+                  className="backdrop-blur-md bg-white/10 border border-white/20 p-10 rounded-3xl h-full flex flex-col"
+                  style={{ boxShadow: '0 8px 32px rgba(0,0,0,0.2)' }}
+                >
+                  <div className="text-5xl text-white/40 font-serif leading-none mb-6">"</div>
+                  <p className="text-lg md:text-xl text-white font-medium mb-8 flex-grow leading-relaxed">
                     {testimonial.quote}
                   </p>
-                  <div>
-                    <div className="font-bold">{testimonial.author}</div>
-                    <div className="text-gray-500">{testimonial.company}</div>
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-full bg-accent flex items-center justify-center text-white font-bold text-lg shrink-0">
+                      {testimonial.initial}
+                    </div>
+                    <div>
+                      <div className="font-bold text-white">{testimonial.author}</div>
+                      <div className="text-white/60 text-sm">{testimonial.company}</div>
+                    </div>
                   </div>
-                </div>
-              </MotionWrapper>
+                </motion.div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 
@@ -289,29 +475,14 @@ export default function Home() {
           <MotionWrapper animation="fade-up-lg" className="mb-16 text-center">
             <h2 className="text-4xl md:text-5xl font-bold tracking-tighter">Frequently Asked Questions</h2>
           </MotionWrapper>
-
-          <div className="space-y-4">
-            {faqs.map((faq, i) => (
-              <MotionWrapper key={i} animation="fade-up-lg" delay={i * 50}>
-                <div className="border border-border rounded-2xl overflow-hidden">
-                  <button 
-                    className="w-full px-6 py-5 text-left flex justify-between items-center font-bold text-lg hover:bg-light-bg transition-colors"
-                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  >
-                    {faq.q}
-                    {openFaq === i ? <ChevronUp className="text-accent" /> : <ChevronDown className="text-gray-400" />}
-                  </button>
-                  <div 
-                    className={`px-6 overflow-hidden transition-all duration-300 ease-in-out ${
-                      openFaq === i ? 'max-h-40 py-5 bg-light-bg border-t border-border' : 'max-h-0'
-                    }`}
-                  >
-                    <p className="text-gray-600">{faq.a}</p>
-                  </div>
-                </div>
-              </MotionWrapper>
-            ))}
-          </div>
+          <FAQAccordion faqs={[
+            { q: "What is your minimum order quantity?", a: "Our minimum order quantity is 50 units per design." },
+            { q: "How long does production take?", a: "Standard production takes 14-21 days after sample approval." },
+            { q: "Do you provide samples?", a: "Yes, we provide a physical sample within 48 hours of brief approval." },
+            { q: "Can you help with design?", a: "Yes, our in-house design team can help refine your concepts." },
+            { q: "What printing methods do you use?", a: "We offer screen printing, embroidery, sublimation, and heat transfer." },
+            { q: "Do you deliver outside Addis Ababa?", a: "Yes, we deliver across Ethiopia and handle export orders." }
+          ]} />
         </div>
       </section>
 
@@ -319,27 +490,27 @@ export default function Home() {
       <section className="py-24 md:py-32 bg-dark-bg text-white text-center">
         <div className="max-w-[800px] mx-auto px-4 md:px-8">
           <MotionWrapper animation="fade-up-lg">
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-8 text-balance">
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-8 text-balance !text-white">
               Ready to see your brand on apparel that actually looks right?
             </h2>
             <p className="text-xl text-gray-300 mb-12 leading-relaxed">
               Send us a WhatsApp. Tell us what you need. We'll send you a quote within 24 hours and a sample within 48.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <a 
+              <MagneticButton
                 href="https://wa.me/251911149383?text=Hi%2C+I'm+interested+in+a+quote"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-whatsapp hover:bg-whatsapp-hover text-white px-8 py-4 rounded-full font-medium transition-colors text-lg"
               >
                 WhatsApp Us Now
-              </a>
-              <Link 
-                to="/contact"
+              </MagneticButton>
+              <MagneticButton
+                href="/contact"
                 className="bg-transparent border border-white hover:bg-white hover:text-dark-bg text-white px-8 py-4 rounded-full font-medium transition-colors text-lg"
               >
                 Get a Quote
-              </Link>
+              </MagneticButton>
             </div>
           </MotionWrapper>
         </div>

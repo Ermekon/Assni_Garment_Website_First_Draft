@@ -22,7 +22,7 @@ export default function MaterialsPrinting() {
             <p className="text-sm font-bold tracking-widest uppercase mb-6 text-gray-300">
               MATERIALS & PRINTING
             </p>
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 text-balance">
+            <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 text-balance !text-white">
               The wrong printing method costs you. Here's how to choose the right one.
             </h1>
           </MotionWrapper>
@@ -205,7 +205,7 @@ export default function MaterialsPrinting() {
       <section className="py-24 md:py-32 bg-dark-bg text-white text-center">
         <div className="max-w-[800px] mx-auto px-4 md:px-8">
           <MotionWrapper animation="fade-up-lg">
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-8 text-balance">
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-8 text-balance !text-white">
               Tell us your design, quantity, and how the garment will be used.
             </h2>
             <a 

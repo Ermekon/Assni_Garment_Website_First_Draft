@@ -1,11 +1,9 @@
 import { Link } from 'react-router-dom';
 import MotionWrapper from '../components/MotionWrapper';
-import { ChevronDown, ChevronUp } from 'lucide-react';
-import { useState } from 'react';
+import FAQAccordion from '../components/FAQAccordion';
+import { motion } from 'motion/react';
 
 export default function HowWeWork() {
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
-
   const faqs = [
     { q: "How long does the whole process take?", a: "Typically 14-21 days from sample approval to final delivery, depending on order size." },
     { q: "What if I don't like the sample?", a: "We revise it until you are satisfied. Full production only begins after your final approval." },
@@ -22,8 +20,8 @@ export default function HowWeWork() {
             <p className="text-sm font-bold tracking-widest uppercase mb-6 text-gray-300">
               HOW WE WORK
             </p>
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 text-balance">
-              You'll know exactly what's happening at every stage — because we tell you.
+            <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 text-balance !text-white">
+              You'll know exactly what's happening at every stage because we tell you.
             </h1>
           </MotionWrapper>
         </div>
@@ -41,33 +39,59 @@ export default function HowWeWork() {
         </div>
       </section>
 
-      {/* 5-Step Process */}
+      {/* 5-Step Process — Animated Timeline */}
       <section className="py-20 md:py-32 bg-light-bg">
         <div className="max-w-[1000px] mx-auto px-4 md:px-8">
-          <div className="space-y-16">
-            {[
-              { num: "01", title: "Send Your Brief", desc: "Tell us what you need: product type, quantity, deadline, and any design files. We'll review it and ask any clarifying questions.", outcome: "A clear, itemized quote within 24 hours." },
-              { num: "02", title: "Approve the Sample", desc: "Once you accept the quote, we produce a single physical sample of your order. You can touch the fabric, check the fit, and inspect the print quality.", outcome: "A physical sample in your hands within 48 hours." },
-              { num: "03", title: "Full Production", desc: "After you approve the sample, we begin full production. Our in-house team handles everything, ensuring consistency across the entire batch.", outcome: "Regular updates on production status." },
-              { num: "04", title: "Quality Control & Packaging", desc: "Every item is inspected for flaws, loose threads, and print consistency. We then fold and package the garments according to your requirements.", outcome: "A flawless batch ready for your team." },
-              { num: "05", title: "Delivery", desc: "We deliver the final order to your specified location in Addis Ababa, or coordinate shipping for regional and export orders.", outcome: "Your order delivered on time, as promised." }
-            ].map((step, i) => (
-              <MotionWrapper key={i} animation="fade-up-lg" delay={i * 100}>
-                <div className="flex flex-col md:flex-row gap-8">
-                  <div className="md:w-1/4">
-                    <div className="text-6xl md:text-8xl font-bold text-accent opacity-20 leading-none">{step.num}</div>
+          <div className="relative">
+            {/* Animated vertical line */}
+            <div className="absolute left-[27px] md:left-[39px] top-0 bottom-0 w-[2px] bg-border hidden sm:block" />
+            <motion.div
+              className="absolute left-[27px] md:left-[39px] top-0 w-[2px] bg-accent hidden sm:block origin-top"
+              initial={{ scaleY: 0 }}
+              whileInView={{ scaleY: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
+              style={{ height: '100%' }}
+            />
+
+            <div className="space-y-16">
+              {[
+                { num: "01", title: "Send Your Brief", desc: "Tell us what you need: product type, quantity, deadline, and any design files. We'll review it and ask any clarifying questions.", outcome: "A clear, itemized quote within 24 hours." },
+                { num: "02", title: "Approve the Sample", desc: "Once you accept the quote, we produce a single physical sample of your order. You can touch the fabric, check the fit, and inspect the print quality.", outcome: "A physical sample in your hands within 48 hours." },
+                { num: "03", title: "Full Production", desc: "After you approve the sample, we begin full production. Our in-house team handles everything, ensuring consistency across the entire batch.", outcome: "Regular updates on production status." },
+                { num: "04", title: "Quality Control & Packaging", desc: "Every item is inspected for flaws, loose threads, and print consistency. We then fold and package the garments according to your requirements.", outcome: "A flawless batch ready for your team." },
+                { num: "05", title: "Delivery", desc: "We deliver the final order to your specified location in Addis Ababa, or coordinate shipping for regional and export orders.", outcome: "Your order delivered on time, as promised." }
+              ].map((step, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: '-10%' }}
+                  transition={{ delay: i * 0.12, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                  className="flex gap-8 sm:gap-12"
+                >
+                  {/* Circle node */}
+                  <div className="relative shrink-0">
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      whileInView={{ scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.12 + 0.2, duration: 0.4, type: 'spring' }}
+                      className="w-14 h-14 md:w-20 md:h-20 rounded-full bg-accent text-white flex items-center justify-center font-bold text-lg md:text-xl z-10 relative"
+                    >
+                      {step.num}
+                    </motion.div>
                   </div>
-                  <div className="md:w-3/4 pt-4">
-                    <h3 className="text-3xl font-bold mb-4">{step.title}</h3>
+                  <div className="pt-3 pb-16">
+                    <h3 className="text-2xl md:text-3xl font-bold mb-4">{step.title}</h3>
                     <p className="text-lg text-gray-600 mb-6 leading-relaxed">{step.desc}</p>
                     <div className="bg-white p-4 rounded-xl border border-border inline-block">
                       <span className="font-bold text-accent">→ You get:</span> <span className="font-medium">{step.outcome}</span>
                     </div>
                   </div>
-                </div>
-                {i < 4 && <div className="h-px w-full bg-border mt-16"></div>}
-              </MotionWrapper>
-            ))}
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -82,8 +106,8 @@ export default function HowWeWork() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <MotionWrapper animation="fade-up-lg" delay={100}>
               <div className="bg-dark-bg text-white p-8 rounded-3xl h-full">
-                <div className="text-accent font-bold mb-4">Day 1–2</div>
-                <h3 className="text-2xl font-bold mb-4">Brief & Quote</h3>
+                <div className="text-white font-bold mb-4">Day 1–2</div>
+                <h3 className="text-2xl font-bold mb-4 !text-white">Brief & Quote</h3>
                 <p className="text-gray-400">We finalize the details and provide a comprehensive quote.</p>
               </div>
             </MotionWrapper>
@@ -136,29 +160,7 @@ export default function HowWeWork() {
           <MotionWrapper animation="fade-up-lg" className="mb-16 text-center">
             <h2 className="text-4xl md:text-5xl font-bold tracking-tighter">Process FAQ</h2>
           </MotionWrapper>
-
-          <div className="space-y-4">
-            {faqs.map((faq, i) => (
-              <MotionWrapper key={i} animation="fade-up-lg" delay={i * 50}>
-                <div className="border border-border rounded-2xl overflow-hidden">
-                  <button 
-                    className="w-full px-6 py-5 text-left flex justify-between items-center font-bold text-lg hover:bg-light-bg transition-colors"
-                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  >
-                    {faq.q}
-                    {openFaq === i ? <ChevronUp className="text-accent" /> : <ChevronDown className="text-gray-400" />}
-                  </button>
-                  <div 
-                    className={`px-6 overflow-hidden transition-all duration-300 ease-in-out ${
-                      openFaq === i ? 'max-h-40 py-5 bg-light-bg border-t border-border' : 'max-h-0'
-                    }`}
-                  >
-                    <p className="text-gray-600">{faq.a}</p>
-                  </div>
-                </div>
-              </MotionWrapper>
-            ))}
-          </div>
+          <FAQAccordion faqs={faqs} />
         </div>
       </section>
 
@@ -166,7 +168,7 @@ export default function HowWeWork() {
       <section className="py-24 md:py-32 bg-dark-bg text-white text-center">
         <div className="max-w-[800px] mx-auto px-4 md:px-8">
           <MotionWrapper animation="fade-up-lg">
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-8 text-balance">
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-8 text-balance !text-white">
               Step one takes 30 seconds.
             </h2>
             <p className="text-xl text-gray-300 mb-12 leading-relaxed">

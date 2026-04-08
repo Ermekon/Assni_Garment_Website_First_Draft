@@ -12,7 +12,7 @@ export default function Services() {
             <p className="text-sm font-bold tracking-widest uppercase mb-6 text-gray-300">
               OUR SERVICES
             </p>
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 text-balance">
+            <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 text-balance !text-white">
               Everything you need to outfit your team.
             </h1>
             <div className="flex flex-wrap justify-center gap-4 mt-12">
@@ -115,16 +115,10 @@ export default function Services() {
         <div className="max-w-[1410px] mx-auto px-4 md:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="aspect-square bg-gray-200 rounded-3xl overflow-hidden relative">
-              <img src="https://picsum.photos/seed/production/800/800" alt="Production" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
-              <div className="absolute inset-0 flex items-center justify-center bg-black/10">
-                <span className="bg-white/90 px-4 py-2 rounded-full text-sm font-bold">(Add real images)</span>
-              </div>
+              <img src="/images/about/production.jpg" alt="Production" className="w-full h-full object-cover" loading="lazy" />
             </div>
             <div className="aspect-square bg-gray-200 rounded-3xl overflow-hidden relative">
-              <img src="https://picsum.photos/seed/printing/800/800" alt="Printing" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
-              <div className="absolute inset-0 flex items-center justify-center bg-black/10">
-                <span className="bg-white/90 px-4 py-2 rounded-full text-sm font-bold">(Add real images)</span>
-              </div>
+              <img src="/images/about/printing.jpg" alt="Printing" className="w-full h-full object-cover" loading="lazy" />
             </div>
           </div>
         </div>
@@ -134,7 +128,7 @@ export default function Services() {
       <section className="py-24 md:py-32 bg-dark-bg text-white text-center">
         <div className="max-w-[800px] mx-auto px-4 md:px-8">
           <MotionWrapper animation="fade-up-lg">
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-8 text-balance">
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-8 text-balance !text-white">
               Not sure what you need? We'll guide you.
             </h2>
             <p className="text-xl text-gray-300 mb-12 leading-relaxed">

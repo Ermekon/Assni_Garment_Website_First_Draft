@@ -10,7 +10,7 @@ export default function Contact() {
             <p className="text-sm font-bold tracking-widest uppercase mb-6 text-gray-300">
               CONTACT US
             </p>
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 text-balance">
+            <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 text-balance !text-white">
               Let's discuss your next order.
             </h1>
           </MotionWrapper>

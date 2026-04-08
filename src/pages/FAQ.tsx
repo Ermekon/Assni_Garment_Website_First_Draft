@@ -1,14 +1,7 @@
 import MotionWrapper from '../components/MotionWrapper';
-import { ChevronDown, ChevronUp } from 'lucide-react';
-import { useState } from 'react';
+import FAQAccordion from '../components/FAQAccordion';
 
 export default function FAQ() {
-  const [openFaq, setOpenFaq] = useState<string | null>(null);
-
-  const toggleFaq = (id: string) => {
-    setOpenFaq(openFaq === id ? null : id);
-  };
-
   const faqGroups = [
     {
       title: "Orders & Process",
@@ -63,7 +56,7 @@ export default function FAQ() {
             <p className="text-sm font-bold tracking-widest uppercase mb-6 text-gray-300">
               FAQ
             </p>
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 text-balance">
+            <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 text-balance !text-white">
               The questions clients ask before they place their first order.
             </h1>
           </MotionWrapper>
@@ -78,30 +71,7 @@ export default function FAQ() {
               <MotionWrapper animation="fade-up-lg">
                 <h3 className="text-2xl font-bold mb-6 text-heading">{group.title}</h3>
               </MotionWrapper>
-              <div className="space-y-4">
-                {group.items.map((faq, i) => (
-                  <MotionWrapper key={faq.id} animation="fade-up-lg" delay={i * 50}>
-                    <div className="border border-border rounded-2xl overflow-hidden bg-white">
-                      <button 
-                        className="w-full px-6 py-5 text-left flex justify-between items-center font-bold text-[15px] hover:bg-gray-50 transition-colors"
-                        onClick={() => toggleFaq(faq.id)}
-                      >
-                        {faq.q}
-                        <div className={`transform transition-transform duration-300 ${openFaq === faq.id ? 'rotate-45' : ''}`}>
-                          {openFaq === faq.id ? <ChevronUp className="text-accent" /> : <ChevronDown className="text-gray-400" />}
-                        </div>
-                      </button>
-                      <div 
-                        className={`px-6 overflow-hidden transition-all duration-300 ease-in-out bg-gray-50 ${
-                          openFaq === faq.id ? 'max-h-60 py-5 border-t border-border' : 'max-h-0'
-                        }`}
-                      >
-                        <p className="text-gray-600 text-[15px]">{faq.a}</p>
-                      </div>
-                    </div>
-                  </MotionWrapper>
-                ))}
-              </div>
+              <FAQAccordion faqs={group.items} />
             </div>
           ))}
         </div>
@@ -111,7 +81,7 @@ export default function FAQ() {
       <section className="py-24 md:py-32 bg-dark-bg text-white text-center">
         <div className="max-w-[800px] mx-auto px-4 md:px-8">
           <MotionWrapper animation="fade-up-lg">
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-8 text-balance">
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-8 text-balance !text-white">
               Still Have Questions?
             </h2>
             <a 

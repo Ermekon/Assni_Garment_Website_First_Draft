@@ -13,7 +13,7 @@ export default function CaseStudies() {
             <p className="text-sm font-bold tracking-widest uppercase mb-6 text-gray-300">
               CASE STUDIES
             </p>
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 text-balance">
+            <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 text-balance !text-white">
               Orders that had to be right. Here's how they went.
             </h1>
           </MotionWrapper>
@@ -38,27 +38,27 @@ export default function CaseStudies() {
             <div className="inline-block bg-white/10 text-white px-4 py-2 rounded-full text-sm font-bold tracking-wider mb-6">
               400 T-SHIRTS · SCREEN PRINTING · 14-DAY DEADLINE
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-16 !text-white">
               National Health Campaign Launch
             </h2>
           </MotionWrapper>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             <MotionWrapper animation="fade-up-lg" delay={100}>
-              <h3 className="text-xl font-bold mb-4 text-accent">01. The Situation</h3>
-              <p className="text-gray-300 leading-relaxed">
+              <h3 className="text-xl font-bold mb-4 !text-white">01. The Situation</h3>
+              <p className="text-white leading-relaxed">
                 A major NGO needed 400 high-quality, branded t-shirts for a nationwide health campaign launching in exactly 14 days. The shirts needed to be durable enough for field workers.
               </p>
             </MotionWrapper>
             <MotionWrapper animation="fade-up-lg" delay={200}>
-              <h3 className="text-xl font-bold mb-4 text-accent">02. The Challenge</h3>
-              <p className="text-gray-300 leading-relaxed">
+              <h3 className="text-xl font-bold mb-4 !text-white">02. The Challenge</h3>
+              <p className="text-white leading-relaxed">
                 Their previous supplier had delivered shirts where the print cracked after one wash. They needed absolute assurance of print quality within a very tight timeframe.
               </p>
             </MotionWrapper>
             <MotionWrapper animation="fade-up-lg" delay={300}>
-              <h3 className="text-xl font-bold mb-4 text-accent">03. The Outcome</h3>
-              <p className="text-gray-300 leading-relaxed">
+              <h3 className="text-xl font-bold mb-4 !text-white">03. The Outcome</h3>
+              <p className="text-white leading-relaxed">
                 We produced a physical sample in 48 hours. Upon approval, we used premium plastisol screen printing on 100% cotton shirts, delivering the full order 2 days ahead of schedule.
               </p>
             </MotionWrapper>
@@ -136,9 +136,9 @@ export default function CaseStudies() {
           </MotionWrapper>
 
           <MotionWrapper animation="fade-up-lg" delay={200}>
-            <BeforeAfterSlider 
-              beforeImage="https://picsum.photos/seed/blankshirt/1200/800"
-              afterImage="https://picsum.photos/seed/brandedshirt/1200/800"
+            <BeforeAfterSlider
+              beforeImage="/images/case-studies/before.jpg"
+              afterImage="/images/case-studies/after.jpg"
               beforeLabel="Blank Garment"
               afterLabel="Assni Branded"
             />
@@ -175,7 +175,7 @@ export default function CaseStudies() {
       <section className="py-24 md:py-32 bg-dark-bg text-white text-center">
         <div className="max-w-[800px] mx-auto px-4 md:px-8">
           <MotionWrapper animation="fade-up-lg">
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-8 text-balance">
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-8 text-balance !text-white">
               Your order has stakes too.
             </h2>
             <p className="text-xl text-gray-300 mb-12 leading-relaxed">

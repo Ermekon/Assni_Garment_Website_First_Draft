@@ -1,5 +1,9 @@
 import MotionWrapper from '../components/MotionWrapper';
 import { Linkedin, MessageCircle } from 'lucide-react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, EffectFade } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/effect-fade';
 
 export default function About() {
   return (
@@ -11,7 +15,7 @@ export default function About() {
             <p className="text-sm font-bold tracking-widest uppercase mb-6 text-gray-300">
               ABOUT ASSNI
             </p>
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 text-balance leading-tight">
+            <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 leading-tight !text-white">
               You're not dealing with a sales team. You're dealing with the person responsible for your order.
             </h1>
           </MotionWrapper>
@@ -35,11 +39,21 @@ export default function About() {
             </div>
             <div className="md:w-1/2 w-full">
               <MotionWrapper animation="zoom-out-sm">
-                <div className="aspect-[4/3] rounded-3xl overflow-hidden relative bg-gray-200">
-                  <img src="https://picsum.photos/seed/facility/800/600" alt="Assni Facility" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/10">
-                    <span className="bg-white/90 px-4 py-2 rounded-full text-sm font-bold">(Add facility wide shot)</span>
-                  </div>
+                <div className="aspect-[4/3] rounded-3xl overflow-hidden">
+                  <Swiper
+                    modules={[Autoplay, EffectFade]}
+                    effect="fade"
+                    autoplay={{ delay: 3000, disableOnInteraction: false }}
+                    loop={true}
+                    className="w-full h-full"
+                  >
+                    <SwiperSlide>
+                      <img src="/images/about/production.jpg" alt="Production" className="w-full h-full object-cover" loading="lazy" />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <img src="/images/about/printing.jpg" alt="Printing" className="w-full h-full object-cover" loading="lazy" />
+                    </SwiperSlide>
+                  </Swiper>
                 </div>
               </MotionWrapper>
             </div>
@@ -103,7 +117,7 @@ export default function About() {
       <section className="py-20 bg-dark-bg text-white">
         <div className="max-w-[1410px] mx-auto px-4 md:px-8">
           <MotionWrapper animation="fade-up-lg" className="mb-16">
-            <h2 className="text-4xl font-bold tracking-tighter">Our Values in Practice</h2>
+            <h2 className="text-4xl font-bold tracking-tighter !text-white">Our Values in Practice</h2>
           </MotionWrapper>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -115,8 +129,8 @@ export default function About() {
             ].map((value, i) => (
               <MotionWrapper key={i} animation="fade-up-lg" delay={i * 100}>
                 <div className="bg-white/5 p-8 rounded-3xl border border-white/10 h-full">
-                  <h3 className="text-xl font-bold mb-4 text-accent">{value.title}</h3>
-                  <p className="text-gray-300 leading-relaxed">{value.desc}</p>
+                  <h3 className="text-xl font-bold mb-4 !text-white">{value.title}</h3>
+                  <p className="text-white leading-relaxed">{value.desc}</p>
                 </div>
               </MotionWrapper>
             ))}
@@ -152,10 +166,10 @@ export default function About() {
       <section className="py-4 bg-light-bg">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 px-4">
           {[
-            { img: "https://picsum.photos/seed/floor/600/600", label: "Production Floor" },
-            { img: "https://picsum.photos/seed/decor/600/600", label: "Decoration Close-up" },
-            { img: "https://picsum.photos/seed/goods/600/600", label: "Finished Goods" },
-            { img: "https://picsum.photos/seed/pack/600/600", label: "Packaging" }
+            { img: "/images/about gallery/facility.jpg", label: "Production Floor" },
+            { img: "/images/about gallery/facility_2.jpg", label: "Decoration Close-up" },
+            { img: "/images/about gallery/facility_3.jpg", label: "Finished Goods" },
+            { img: "/images/about gallery/facility_4.jpg", label: "Packaging" }
           ].map((item, i) => (
             <MotionWrapper key={i} animation="fade-up-lg" delay={i * 100}>
               <div className="aspect-square bg-gray-200 rounded-2xl overflow-hidden relative group">
@@ -174,7 +188,7 @@ export default function About() {
       <section className="py-24 md:py-32 bg-dark-bg text-white text-center">
         <div className="max-w-[800px] mx-auto px-4 md:px-8">
           <MotionWrapper animation="fade-up-lg">
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-8 text-balance">
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-8 text-balance !text-white">
               If you want to work with a supplier who answers directly — this is it.
             </h2>
             <a 

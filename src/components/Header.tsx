@@ -37,8 +37,8 @@ export default function Header() {
   return (
     <>
       {/* Topbar */}
-      <div className="bg-dark-bg text-white py-2.5 px-4 text-sm">
-        <div className="max-w-[1410px] mx-auto flex justify-between items-center">
+      <div className="bg-dark-bg text-white py-2.5 text-sm">
+        <div className="max-w-[1410px] mx-auto px-4 md:px-8 flex justify-between items-center">
           <div className="w-full md:w-1/2 overflow-hidden">
             <Swiper
               modules={[Autoplay]}
@@ -52,10 +52,6 @@ export default function Header() {
             </Swiper>
           </div>
           <nav className="hidden md:flex gap-6 text-gray-300">
-            <Link to="/how-we-work" className="hover:text-white transition-colors">How It Works</Link>
-            <Link to="/materials" className="hover:text-white transition-colors">Materials & Printing</Link>
-            <Link to="/case-studies" className="hover:text-white transition-colors">Case Studies</Link>
-            <Link to="/about" className="hover:text-white transition-colors">About</Link>
             <Link to="/contact" className="hover:text-white transition-colors">Contact</Link>
           </nav>
         </div>
