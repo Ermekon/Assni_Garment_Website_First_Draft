@@ -275,20 +275,12 @@ export default function Home() {
         <div className="max-w-[1410px] mx-auto px-4 md:px-8">
           {/* Mobile: stacked layout */}
           <div className="flex flex-col md:hidden gap-0 rounded-3xl overflow-hidden border border-border">
-            <motion.div
-              initial={{ clipPath: 'inset(0 100% 0 0)' }}
-              whileInView={{ clipPath: 'inset(0 0% 0 0)' }}
-              viewport={{ once: true, margin: '-10%' }}
-              transition={{ duration: 1.0, ease: [0.22, 1, 0.36, 1] }}
-              className="w-full"
-            >
               <img
                 src="/images/hero/cta-bg.jpg"
                 alt="Delivery"
                 className="w-full h-[260px] object-cover"
                 loading="lazy"
               />
-            </motion.div>
             <div className="bg-white p-8">
               <MotionWrapper animation="fade-up-lg">
                 <h2 className="text-3xl font-bold tracking-tighter mb-6">See What We Deliver</h2>
@@ -315,20 +307,12 @@ export default function Home() {
 
           {/* Desktop: side-by-side layout */}
           <div className="hidden md:block relative rounded-3xl overflow-hidden">
-            <motion.div
-              initial={{ clipPath: 'inset(0 100% 0 0)' }}
-              whileInView={{ clipPath: 'inset(0 0% 0 0)' }}
-              viewport={{ once: true, margin: '-10%' }}
-              transition={{ duration: 1.0, ease: [0.22, 1, 0.36, 1] }}
-              className="w-full"
-            >
               <img
                 src="/images/hero/cta-bg.jpg"
                 alt="Delivery"
                 className="w-full h-[600px] object-cover"
                 loading="lazy"
               />
-            </motion.div>
             <div className="absolute inset-0 bg-black/20"></div>
             <div className="absolute inset-y-0 left-0 w-1/2 bg-white p-16 flex flex-col justify-center">
               <MotionWrapper animation="fade-up-lg">
