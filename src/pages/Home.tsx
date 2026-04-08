@@ -273,7 +273,48 @@ export default function Home() {
       {/* See What We Deliver */}
       <section className="py-20 md:py-32 bg-white">
         <div className="max-w-[1410px] mx-auto px-4 md:px-8">
-          <div className="relative rounded-3xl overflow-hidden">
+          {/* Mobile: stacked layout */}
+          <div className="flex flex-col md:hidden gap-0 rounded-3xl overflow-hidden border border-border">
+            <motion.div
+              initial={{ clipPath: 'inset(0 100% 0 0)' }}
+              whileInView={{ clipPath: 'inset(0 0% 0 0)' }}
+              viewport={{ once: true, margin: '-10%' }}
+              transition={{ duration: 1.0, ease: [0.22, 1, 0.36, 1] }}
+              className="w-full"
+            >
+              <img
+                src="/images/hero/cta-bg.jpg"
+                alt="Delivery"
+                className="w-full h-[260px] object-cover"
+                loading="lazy"
+              />
+            </motion.div>
+            <div className="bg-white p-8">
+              <MotionWrapper animation="fade-up-lg">
+                <h2 className="text-3xl font-bold tracking-tighter mb-6">See What We Deliver</h2>
+                <ul className="space-y-4 mb-6">
+                  <li className="flex items-start gap-3">
+                    <span className="text-accent mt-1">•</span>
+                    <span className="text-base text-gray-600">Branded T-shirts with clean, consistent prints</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-accent mt-1">•</span>
+                    <span className="text-base text-gray-600">Close-up embroidery and stitching quality</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-accent mt-1">•</span>
+                    <span className="text-base text-gray-600">Uniform sets prepared and packaged for delivery</span>
+                  </li>
+                </ul>
+                <p className="text-base font-medium">
+                  Every order includes a sample for your approval before full production begins.
+                </p>
+              </MotionWrapper>
+            </div>
+          </div>
+
+          {/* Desktop: side-by-side layout */}
+          <div className="hidden md:block relative rounded-3xl overflow-hidden">
             <motion.div
               initial={{ clipPath: 'inset(0 100% 0 0)' }}
               whileInView={{ clipPath: 'inset(0 0% 0 0)' }}
@@ -285,10 +326,11 @@ export default function Home() {
                 src="/images/hero/cta-bg.jpg"
                 alt="Delivery"
                 className="w-full h-[600px] object-cover"
+                loading="lazy"
               />
             </motion.div>
             <div className="absolute inset-0 bg-black/20"></div>
-            <div className="absolute inset-y-0 left-0 w-full md:w-1/2 bg-white p-8 md:p-16 flex flex-col justify-center">
+            <div className="absolute inset-y-0 left-0 w-1/2 bg-white p-16 flex flex-col justify-center">
               <MotionWrapper animation="fade-up-lg">
                 <h2 className="text-4xl font-bold tracking-tighter mb-8">See What We Deliver</h2>
                 <ul className="space-y-4 mb-8">
