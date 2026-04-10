@@ -263,7 +263,7 @@ export default function Home() {
         <div className="max-w-[1410px] mx-auto px-4 md:px-8 mt-8 text-center">
           <MagneticButton
             href="/contact"
-            className="inline-block bg-dark-bg hover:bg-black text-white px-8 py-4 rounded-full font-medium transition-colors text-lg"
+            className="inline-block bg-dark-bg hover:bg-accent-hover text-white px-8 py-4 rounded-full font-medium transition-colors text-lg"
           >
             Get a Quote
           </MagneticButton>

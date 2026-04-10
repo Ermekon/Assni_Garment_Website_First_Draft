@@ -90,7 +90,7 @@ export default function Header() {
             </a>
             <Link 
               to="/contact"
-              className="bg-dark-bg hover:bg-black text-white px-6 py-3 rounded-full font-medium transition-colors"
+              className="bg-dark-bg hover:bg-accent-hover text-white px-6 py-3 rounded-full font-medium transition-colors"
             >
               Get a Quote
             </Link>

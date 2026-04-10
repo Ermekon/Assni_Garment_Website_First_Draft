@@ -4,26 +4,26 @@
 @theme {
   --font-sans: 'Instrument Sans', sans-serif;
   --color-background: #ffffff;
-  --color-heading: #111111;
+  --color-heading: #0a2a43;
   --color-text: #444444;
-  --color-border: #ebebeb;
-  --color-light-bg: #f7f5f2;
-  --color-dark-bg: #111111;
-  --color-accent: #1A6B3C;
-  --color-accent-hover: #145530;
+  --color-border: #c5dded;
+  --color-light-bg: #e8f2f9;
+  --color-dark-bg: #0a2a43;
+  --color-accent: #14547F;
+  --color-accent-hover: #0f3f61;
   --color-whatsapp: #25D366;
   --color-whatsapp-hover: #1da851;
 }
 
 :root {
   --color-background: #ffffff;
-  --color-heading: #111111;
+  --color-heading: #0a2a43;
   --color-text: #444444;
-  --color-border: #ebebeb;
-  --color-light-bg: #f7f5f2;
-  --color-dark-bg: #111111;
-  --color-accent: #1A6B3C;
-  --color-accent-hover: #145530;
+  --color-border: #c5dded;
+  --color-light-bg: #e8f2f9;
+  --color-dark-bg: #0a2a43;
+  --color-accent: #14547F;
+  --color-accent-hover: #0f3f61;
   --color-whatsapp: #25D366;
   --color-whatsapp-hover: #1da851;
   

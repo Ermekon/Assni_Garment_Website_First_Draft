@@ -73,7 +73,7 @@ export default function Contact() {
                     <label className="block text-sm font-bold mb-2">What do you need?</label>
                     <textarea rows={4} className="w-full px-4 py-3 rounded-xl border border-border focus:outline-none focus:border-accent" placeholder="Product type, quantity, deadline..."></textarea>
                   </div>
-                  <button type="button" className="w-full bg-dark-bg hover:bg-black text-white py-4 rounded-full font-bold transition-colors">
+                  <button type="button" className="w-full bg-dark-bg hover:bg-accent-hover text-white py-4 rounded-full font-bold transition-colors">
                     Send Message
                   </button>
                 </form>
